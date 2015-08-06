@@ -1,0 +1,96 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta et="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <!-- <link rel="stylesheet" href="css/normalize.css"> -->
+        <!-- <link rel="stylesheet" href="css/main.css"> -->
+        <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+        <link rel="import" href="routes.html">
+        <link rel="import" href="bower_components/iron-icons/iron-icons.html">
+        <link rel="import" href="bower_components/iron-icons/av-icons.html">
+        <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
+        <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+        <link rel="import" href="bower_components/paper-progress/paper-progress.html">
+        <link rel="import" href="bower_components/paper-item/paper-item.html">
+        <link rel="import" href="bower_components/paper-drawer-panel/paper-drawer-panel.html">
+        <link rel="import" href="bower_components/paper-menu/paper-menu.html">
+        <link rel="import" href="bower_components/iron-pages/iron-pages.html">
+        <link rel="import" href="bower_components/iron-list/iron-list.html">
+        <link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
+    </head>
+    <body fullbleed unresolved>
+        <template is="dom-bind" id="home-page">
+            <paper-drawer-panel>
+                <paper-header-panel drawer>
+                    <paper-toolbar>
+                        <div class="title">
+                            Menu
+                        </div>
+                    </paper-toolbar>
+                    <div>
+                        <more-route-selector>
+                            <paper-menu selected="{{selected}}">
+                                <paper-item route="home">
+                                    <a href="{{urlFor('home')}}">Home</a>
+                                </paper-item>
+                                <paper-item route="students">
+                                    <a href="{{urlFor('students')}}">Students</a>
+                                </paper-item>
+                                <paper-item route="about">
+                                    <a href="{{urlFor('about')}}">About</a>
+                                </paper-item>
+                            </paper-menu>
+                        </more-router-selector>
+                    </div>
+                </paper-header-panel>
+                <paper-header-panel main>
+                    <paper-toolbar>
+                        <paper-icon-button icon="menu" on-tap="menuAction" paper-drawer-toggle></paper-icon-button>
+                        <div class="title">{{AppTitle}}</div>
+                        <paper-icon-button icon="more-vert" on-tap="moreAction"></paper-icon-button>
+                        <paper-progress class="bottom fit" indeterminate="true"></paper-progress>
+                    </paper-toolbar>
+                    <div>
+                        <more-route-selector>
+                            <iron-pages selected="{{selected}}">
+                                <section route="home">
+                                    <h1>Home</h1>
+                                    <div flex>
+                                        <template is="dom-bind" id="student-list">
+                                          <iron-ajax url="data.json" last-response="{{data}}" auto></iron-ajax>
+                                          <iron-list items="[[data]]" as="item">
+                                            <template>
+                                              <div>
+                                                Name: <span>[[item.name]]</span>
+                                              </div>
+                                            </template>
+                                          </iron-list>
+                                        </template>
+                                    </div>
+                                </section>
+                                <section route="students">
+                                    <h2>Students</h2>
+                                </section>
+                                <section route="about">
+                                    <h1>About</h1>
+                                </section>
+                            </iron-pages>
+                        </more-route-selector>
+                    </div>
+                </paper-header-panel>
+            </paper-drawer-panel>
+            <iron-icon icon="android"></iron-icon>
+            <iron-icon icon="av:snooze"></iron-icon>
+        </template>
+
+        <script src="js/app.js"></script>
+    </body>
+</html>
