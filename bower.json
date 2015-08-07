@@ -29,6 +29,7 @@
     "iron-pages": "PolymerElements/iron-pages#~1.0.3",
     "more-routing": "Polymore/more-routing#~1.0.0",
     "iron-list": "PolymerElements/iron-list#~1.0.2",
-    "iron-ajax": "PolymerElements/iron-ajax#~1.0.3"
+    "iron-ajax": "PolymerElements/iron-ajax#~1.0.3",
+    "paper-material": "PolymerElements/paper-material#~1.0.1"
   }
 }

@@ -16,6 +16,7 @@
         <link rel="import" href="routes.html">
         <link rel="import" href="bower_components/iron-icons/iron-icons.html">
         <link rel="import" href="bower_components/iron-icons/av-icons.html">
+        <link rel="import" href="bower_components/iron-icons/communication-icons.html">
         <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
         <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
         <link rel="import" href="bower_components/paper-progress/paper-progress.html">
@@ -25,8 +26,10 @@
         <link rel="import" href="bower_components/iron-pages/iron-pages.html">
         <link rel="import" href="bower_components/iron-list/iron-list.html">
         <link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
+        <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+        <link rel="import" href="bower_components/paper-material/paper-material.html">
     </head>
-    <body fullbleed unresolved>
+    <body class="fullbleed layout vertical" unresolved>
         <template is="dom-bind" id="home-page">
             <paper-drawer-panel>
                 <paper-header-panel drawer>
@@ -35,56 +38,52 @@
                             Menu
                         </div>
                     </paper-toolbar>
-                    <div>
-                        <more-route-selector>
-                            <paper-menu selected="{{selected}}">
-                                <paper-item route="home">
-                                    <a href="{{urlFor('home')}}">Home</a>
-                                </paper-item>
-                                <paper-item route="students">
-                                    <a href="{{urlFor('students')}}">Students</a>
-                                </paper-item>
-                                <paper-item route="about">
-                                    <a href="{{urlFor('about')}}">About</a>
-                                </paper-item>
-                            </paper-menu>
-                        </more-router-selector>
-                    </div>
+                    <more-route-selector>
+                        <paper-menu selected="{{selected}}">
+                            <paper-item route="home">
+                                <a href="{{urlFor('home')}}">Home</a>
+                            </paper-item>
+                            <paper-item route="students">
+                                <a href="{{urlFor('students')}}">Students</a>
+                            </paper-item>
+                            <paper-item route="about">
+                                <a href="{{urlFor('about')}}">About</a>
+                            </paper-item>
+                        </paper-menu>
+                    </more-router-selector>
                 </paper-header-panel>
-                <paper-header-panel main>
+                <paper-header-panel class="fit" main>
                     <paper-toolbar>
                         <paper-icon-button icon="menu" on-tap="menuAction" paper-drawer-toggle></paper-icon-button>
                         <div class="title">{{AppTitle}}</div>
                         <paper-icon-button icon="more-vert" on-tap="moreAction"></paper-icon-button>
                         <paper-progress class="bottom fit" indeterminate="true"></paper-progress>
                     </paper-toolbar>
-                    <div>
-                        <more-route-selector>
-                            <iron-pages selected="{{selected}}">
-                                <section route="home">
-                                    <h1>Home</h1>
-                                    <div flex>
-                                        <template is="dom-bind" id="student-list">
-                                          <iron-ajax url="data.json" last-response="{{data}}" auto></iron-ajax>
-                                          <iron-list items="[[data]]" as="item">
-                                            <template>
-                                              <div>
-                                                Name: <span>[[item.name]]</span>
-                                              </div>
-                                            </template>
-                                          </iron-list>
-                                        </template>
-                                    </div>
-                                </section>
-                                <section route="students">
-                                    <h2>Students</h2>
-                                </section>
-                                <section route="about">
-                                    <h1>About</h1>
-                                </section>
-                            </iron-pages>
-                        </more-route-selector>
-                    </div>
+                    <more-route-selector>
+                        <iron-pages selected="{{selected}}">
+                            <section route="home">
+                                <h1>Home</h1>
+                            </section>
+                            <section route="students">
+                                <h2>Students</h2>
+                                  <iron-ajax url="data.json" last-response="{{data}}" auto></iron-ajax>
+                                  <iron-list items="[[data]]" as="item" flex>
+                                    <template>
+                                      <paper-material elevation="1">
+                                          <paper-icon-item>
+                                              <iron-icon icon="face" item-icon></iron-icon>
+                                              Name: <span>[[item.name]]</span>
+                                              <paper-icon-button icon="communication:email"></paper-icon-button>
+                                          </paper-icon-item>
+                                      </paper-material>
+                                    </template>
+                                  </iron-list>
+                            </section>
+                            <section route="about">
+                                <h1>About</h1>
+                            </section>
+                        </iron-pages>
+                    </more-route-selector>
                 </paper-header-panel>
             </paper-drawer-panel>
             <iron-icon icon="android"></iron-icon>
